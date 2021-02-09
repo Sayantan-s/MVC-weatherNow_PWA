@@ -10,10 +10,18 @@ exports.getHome = ((req,res) => {
     })
 })
 
-exports.postCoords = (req,res) => {
+exports.getWeather = ((req,res) => {
+    console.log("Hei")
+})
+
+exports.postCoords = ((req,res) => {
     console.log(req.body);
-    res.redirect('/');
-}
+    res
+    .json({
+        status : 'success',
+        data : req.body
+    })
+})
 
 
 exports.getWeatherData = (async(req,res) => {

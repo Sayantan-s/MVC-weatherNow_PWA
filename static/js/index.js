@@ -4,6 +4,7 @@ const options = {
     timeout: 27000
   };
 
+  
 const getGeoCode = _ => {
     if('geolocation' in navigator){
         console.log('geolocation available')
@@ -17,7 +18,7 @@ const getGeoCode = _ => {
               headers: {
                 'Content-Type': 'application/json'
               },
-              body : JSON.stringify({ nigga : "Hello" })
+              body : JSON.stringify({ latitude,longitude })
             })
             .then(res => console.log(res.json()))
             .catch(err => console.log(err))
