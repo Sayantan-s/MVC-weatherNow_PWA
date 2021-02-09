@@ -10,6 +10,12 @@ exports.getHome = ((req,res) => {
     })
 })
 
+exports.postCoords = (req,res) => {
+    console.log(req.body);
+    res.redirect('/');
+}
+
+
 exports.getWeatherData = (async(req,res) => {
     const api_url = `http://api.openweathermap.org/data/2.5/weather?q=kolkata&appid=23241c693dde77dee1381e703ea69f89`;
     const response = await fetch(api_url);

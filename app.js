@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 require('dotenv').config;
 
 const Home = require('./routes/home');
-const Weather = require('./routes/api');
 
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
@@ -15,7 +14,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('static'));
 
 app.use(Home); 
-app.use('/api',Weather);
 
 
 //api.openweathermap.org/data/2.5/weather?q=kolkata&appid=23241c693dde77dee1381e703ea69f89
