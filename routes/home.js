@@ -9,7 +9,7 @@ router.get('/',getHome);
 
 router.post('/',postCoords);
 
-router.post('/weatherbyll',getWeatherByLatLong);
+router.get('/weatherbyll',getWeatherByLatLong);
 
 
 module.exports = router;
