@@ -13,4 +13,7 @@ block content
             section    
                 h1.text-gray-400(class="lat")
                 h1.text-gray-400(class="long")
-                   
+                if data.main.temp 
+                    h2 #{data.placeName}
+                else 
+                    h2 Data can't be retrieved!

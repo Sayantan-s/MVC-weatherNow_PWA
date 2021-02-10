@@ -5,14 +5,12 @@ require('dotenv').config;
 let lat,long;
 
 exports.getHome = ((req,res) => {
-    const data = Weather.getDatabyLatLong();
-    console.log(data);
     res
     .status(200)
     .render('index',{
         routeName : 'Home',
-        path : req.url,
-        //data
+        path : req._parsedOriginalUrl.href,
+        data : Weather.getDatabyLatLong() 
     })
 })
 
@@ -37,12 +35,7 @@ exports.getWeatherByLatLong = ( async(req,res) => {
     //23241c693dde77dee1381e703ea69f89
     const response = await fetch(api_url);
     const { weather,main,visibility,wind,sys,name } = await response.json();
-    console.log(weather,main,visibility,wind,sys,name);
     const databyLatLong = new Weather(weather,main,visibility,wind,sys,name);
     databyLatLong.saveClientDataByLatLong();
-    res
-    .status(200)
-    .json({
-        success : true
-    });
+    res.redirect('/');
 })
