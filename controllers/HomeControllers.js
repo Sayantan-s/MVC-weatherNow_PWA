@@ -1,12 +1,18 @@
 const fetch = require('node-fetch');
+const Weather = require('../model/WeatherData');
 require('dotenv').config;
 
+let lat,long;
+
 exports.getHome = ((req,res) => {
+    const data = Weather.getDatabyLatLong();
+    console.log(data);
     res
     .status(200)
     .render('index',{
         routeName : 'Home',
-        path : req.url
+        path : req.url,
+        //data
     })
 })
 
@@ -15,7 +21,9 @@ exports.getWeather = ((req,res) => {
 })
 
 exports.postCoords = ((req,res) => {
-    console.log(req.body);
+    const { latitude,longitude } = req.body;
+    lat = latitude;
+    long = longitude;
     res
     .json({
         status : 'success',
@@ -24,12 +32,12 @@ exports.postCoords = ((req,res) => {
 })
 
 
-exports.getWeatherData = (async(req,res) => {
-    const api_url = `http://api.openweathermap.org/data/2.5/weather?q=kolkata&appid=23241c693dde77dee1381e703ea69f89`;
+exports.getWeatherByLatLong = ( async(req,res) => {
+    const api_url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=23241c693dde77dee1381e703ea69f89`
+    //23241c693dde77dee1381e703ea69f89
     const response = await fetch(api_url);
-    const data = await response.json();
-    console.log(data);
-    res
-    .status(200)
-    .json(data);
+    const { weather,main,visibility,wind,sys,name } = await response.json();
+    //console.log(weather,main,visibility,wind,sys,name);
+    const databyLatLong = new Weather(weather,main,visibility,wind,sys,name);
+    databyLatLong.saveClientDataByLatLong();
 })
