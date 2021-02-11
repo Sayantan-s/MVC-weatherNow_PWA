@@ -1,7 +1,8 @@
 let LatLongDataOfClient = null;
 
 module.exports = class Weather {
-    constructor(weather,main,visibility,windSpeed,sys,placeName){
+    constructor(coords,weather,main,visibility,windSpeed,sys,placeName){
+       this.coords = coords;
        this.weather = weather;
        this.main = main;
        this.visibility = visibility;

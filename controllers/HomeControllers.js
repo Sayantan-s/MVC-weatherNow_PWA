@@ -34,8 +34,8 @@ exports.getWeatherByLatLong = ( async(req,res) => {
     const api_url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=23241c693dde77dee1381e703ea69f89`
     //23241c693dde77dee1381e703ea69f89
     const response = await fetch(api_url);
-    const { weather,main,visibility,wind,sys,name } = await response.json();
-    const databyLatLong = new Weather(weather,main,visibility,wind,sys,name);
+    const { coords,weather,main,visibility,wind,sys,name } = await response.json();
+    const databyLatLong = new Weather(coords,weather,main,visibility,wind,sys,name);
     databyLatLong.saveClientDataByLatLong();
     res.redirect('/');
 })

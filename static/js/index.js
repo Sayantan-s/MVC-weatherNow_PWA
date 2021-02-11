@@ -10,9 +10,6 @@ const getGeoCode = _ => {
         console.log('geolocation available')
         navigator.geolocation.getCurrentPosition(position => {
             const { coords : { latitude,longitude } } = position;
-            console.log(latitude,longitude);
-            document.querySelector('.lat').textContent = latitude.toFixed(2);
-            document.querySelector('.long').textContent = longitude.toFixed(2);
             fetch('/',{
               method: 'POST',
               headers: {
