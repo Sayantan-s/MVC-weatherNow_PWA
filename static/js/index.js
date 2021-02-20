@@ -23,9 +23,9 @@ const getGeoCode = _ => {
     }
     else{
         console.log('geolocation not available')
-    }
+    } 
 
-    window.location.href="/weatherbyll"
+    window.location.href = '/';
 }
 
 document.getElementById('geo-button').addEventListener('click',getGeoCode)

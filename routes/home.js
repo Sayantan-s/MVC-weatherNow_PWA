@@ -1,15 +1,12 @@
 const express = require('express');
 
-const { getHome, postCoords, getWeatherByLatLong } = require('../controllers/HomeControllers')
+const { getHome, postHome } = require('../controllers/HomeControllers')
 
 const router = express.Router();
 
 
 router.get('/',getHome);
 
-router.post('/',postCoords);
-
-router.get('/weatherbyll',getWeatherByLatLong);
-
+router.post('/', postHome);
 
 module.exports = router;

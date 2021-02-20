@@ -14,28 +14,12 @@ exports.getHome = ((req,res) => {
     })
 })
 
-exports.getWeather = ((req,res) => {
-    console.log("Hei")
-})
-
-exports.postCoords = ((req,res) => {
+exports.postHome = (async(req,res) => {
     const { latitude,longitude } = req.body;
-    lat = latitude;
-    long = longitude;
-    res
-    .json({
-        status : 'success',
-        data : req.body
-    })
-})
-
-
-exports.getWeatherByLatLong = ( async(req,res) => {
-    const api_url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=23241c693dde77dee1381e703ea69f89`
-    //23241c693dde77dee1381e703ea69f89
+    const api_url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=23241c693dde77dee1381e703ea69f89`
     const response = await fetch(api_url);
-    const { coords,weather,main,visibility,wind,sys,name } = await response.json();
-    const databyLatLong = new Weather(coords,weather,main,visibility,wind,sys,name);
+    const { coord,weather,main,visibility,wind,sys,name } = await response.json();
+    const databyLatLong = new Weather(coord,weather,main,visibility,wind,sys,name);
     databyLatLong.saveClientDataByLatLong();
     res.redirect('/');
 })
