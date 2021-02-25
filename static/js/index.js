@@ -3,29 +3,32 @@ const options = {
     maximumAge: 30000,
     timeout: 27000
   };
-
   
 const getGeoCode = _ => {
     if('geolocation' in navigator){
         console.log('geolocation available')
         navigator.geolocation.getCurrentPosition(position => {
             const { coords : { latitude,longitude } } = position;
-            fetch('/',{
+            fetch('/weather-now',{
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
               },
               body : JSON.stringify({ latitude,longitude })
             })
-            .then(res => console.log(res.json()))
+            .then(res => res.json())
+            .then(data => {
+              return data.status && location.reload() 
+            })
             .catch(err => console.log(err))
           });
     }
     else{
         console.log('geolocation not available')
     } 
-
-    window.location.href = '/';
 }
 
-document.getElementById('geo-button').addEventListener('click',getGeoCode)
+document.getElementById('geo-button').addEventListener('click',getGeoCode);
+
+let toCelcius = document.querySelector('.tocelcius');
+toCelcius.textContent = ((32 * toCelcius.textContent) - 32) * (5/9) + "&deg;C"

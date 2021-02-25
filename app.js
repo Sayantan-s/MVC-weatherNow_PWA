@@ -16,6 +16,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('static'));
 
 app.use(Home); 
+app.use((req,res) => {
+    res
+    .status(404)
+    .render('404',{
+        
+    })
+})
 
 
 //api.openweathermap.org/data/2.5/weather?q=kolkata&appid=23241c693dde77dee1381e703ea69f89

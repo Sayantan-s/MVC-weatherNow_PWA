@@ -14,12 +14,16 @@ exports.getHome = ((req,res) => {
     })
 })
 
-exports.postHome = (async(req,res) => {
+exports.postWeather = (async(req,res) => {
     const { latitude,longitude } = req.body;
     const api_url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=23241c693dde77dee1381e703ea69f89`
     const response = await fetch(api_url);
     const { coord,weather,main,visibility,wind,sys,name } = await response.json();
     const databyLatLong = new Weather(coord,weather,main,visibility,wind,sys,name);
     databyLatLong.saveClientDataByLatLong();
-    res.redirect('/');
+    res
+    .status(200)
+    .json({
+        status : true
+    });
 })

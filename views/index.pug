@@ -12,7 +12,8 @@ block content
                 button.bg-red-400.px-4.py-2.shadow-sm.rounded-xl.w-max.text-white.font-bold(id="geo-button") Get your location
             section    
                 if data 
-                    -var { placeName,coords } = data
+                    -var { placeName,coords,main } = data
+                    -const { temp,temp_min,temp_max } = main
                     .flex.flex-col 
                         h2 #{placeName}
                         .flex 
@@ -22,7 +23,5 @@ block content
                             h1.flex.ml-5 
                                 span.uppercase latitude 
                                 span.text-gray-400.ml-4 #{coords.lat.toFixed(2)}
-                                
-                       
-                else 
-                    h2 Data can't be retrieved!
+                        .flex 
+                            h1.uppercase.text-2xl.tocelcius #{temp}
