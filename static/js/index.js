@@ -30,5 +30,3 @@ const getGeoCode = _ => {
 
 document.getElementById('geo-button').addEventListener('click',getGeoCode);
 
-let toCelcius = document.querySelector('.tocelcius');
-toCelcius.textContent = ((32 * toCelcius.textContent) - 32) * (5/9) + "&deg;C"
