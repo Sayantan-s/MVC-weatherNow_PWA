@@ -2,8 +2,6 @@ const fetch = require('node-fetch');
 const Weather = require('../model/WeatherData');
 require('dotenv').config;
 
-let lat,long;
-
 exports.getHome = ((req,res) => {
     res
     .status(200)
