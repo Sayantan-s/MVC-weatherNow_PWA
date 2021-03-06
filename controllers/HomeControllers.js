@@ -23,9 +23,7 @@ exports.postWeather = async(req,res) => {
         ...main,
         temp : main.temp - 273.15
     };
-    console.log(temperatures);
     const databyLatLong = new Weather(coord,weather,temperatures,visibility,wind,sys,name);
-    //(32°F − 32) × 5/9
     databyLatLong.saveClientDataByLatLong();
     res
     .status(200)
