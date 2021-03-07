@@ -12,20 +12,32 @@ exports.getHome = ((req,res) => {
     })
 })
 
-exports.postWeather = async(req,res) => {
+exports.getWeather = ((req,res) => {
+    res.redirect('/');
+})
+
+exports.postWeather = (req,res) => {
     const { latitude,longitude } = req.body;
     const api_url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=23241c693dde77dee1381e703ea69f89`
-    const response = await fetch(api_url);
-    const { coord,weather,main,visibility,wind,sys,name } = await response.json();
-    const temperatures = {
-        ...main,
-        temp : main.temp - 273.15
-    };
-    const databyLatLong = new Weather(coord,weather,temperatures,visibility,wind,sys,name);
-    databyLatLong.saveClientDataByLatLong();
-    res
-    .status(200)
-    .json({
-        status : 200
-    });
+    const api_url2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=daily&appid=23241c693dde77dee1381e703ea69f89`
+    Promise.all([
+        api_url,
+        api_url2
+    ].map(url => fetch(url)))
+    .then(res => Promise.all(res.map(result => result.json())))
+    .then(data => {
+        const { coord,weather,main,visibility,wind,sys,name,dt } = data[0];
+        const temperatures = {
+            ...main,
+            temp : main.temp - 273.15
+        };
+        const databyLatLong = new Weather(coord,weather,temperatures,visibility,wind,sys,name,dt);
+        databyLatLong.saveClientDataByLatLong();
+        res
+        .status(200)
+        .json({
+            status : "Ok"
+        });
+    })
+    .catch(err => console.log(err));
 }

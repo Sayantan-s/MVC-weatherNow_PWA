@@ -3,7 +3,13 @@ const options = {
     maximumAge: 30000,
     timeout: 27000
   };
-  
+
+const geoButton = document.getElementById('geo-button');  
+
+/*window.onload = () => {
+  geoButton.click();
+}*/
+
 const getGeoCode = _ => {
     if('geolocation' in navigator){
         console.log('geolocation available')
@@ -18,7 +24,7 @@ const getGeoCode = _ => {
             })
             .then(res => res.json())
             .then(data => {
-              return data.status && location.reload() 
+              location.href = "/weather-now" 
             })
             .catch(err => console.log(err))
           });
@@ -28,5 +34,5 @@ const getGeoCode = _ => {
     } 
 }
 
-document.getElementById('geo-button').addEventListener('click',getGeoCode);
+geoButton.addEventListener('click',getGeoCode);
 
