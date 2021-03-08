@@ -5,12 +5,9 @@ const options = {
   };
 
 const geoButton = document.getElementById('geo-button');  
+const container = document.querySelector('.container');
 
-/*window.onload = () => {
-  geoButton.click();
-}*/
-
-const getGeoCode = _ => {
+const getGeoCode = (_ => {
     if('geolocation' in navigator){
         console.log('geolocation available')
         navigator.geolocation.getCurrentPosition(position => {
@@ -23,8 +20,11 @@ const getGeoCode = _ => {
               body : JSON.stringify({ latitude,longitude })
             })
             .then(res => res.json())
-            .then(data => {
-              location.href = "/weather-now" 
+            .then(_ => {
+              if(container.getAttribute('dataispresent') === "false"){
+                return location.reload();
+              }
+              return;
             })
             .catch(err => console.log(err))
           });
@@ -32,7 +32,7 @@ const getGeoCode = _ => {
     else{
         console.log('geolocation not available')
     } 
-}
+})()
 
-geoButton.addEventListener('click',getGeoCode);
+geoButton.addEventListener('click',() => location.reload());
 

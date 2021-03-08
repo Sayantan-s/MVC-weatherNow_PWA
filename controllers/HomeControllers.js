@@ -26,7 +26,7 @@ exports.postWeather = (req,res) => {
     ].map(url => fetch(url)))
     .then(res => Promise.all(res.map(result => result.json())))
     .then(data => {
-        const { coord,weather,main,visibility,wind,sys,name,dt } = data[0];
+        const { coord,weather,main,visibility,wind,sys,name,dt } = data[0]; 
         const temperatures = {
             ...main,
             temp : main.temp - 273.15

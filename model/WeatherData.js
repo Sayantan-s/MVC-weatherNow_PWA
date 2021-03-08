@@ -1,7 +1,7 @@
 let LatLongDataOfClient = null;
 
 module.exports = class Weather {
-    constructor(coords,weather,main,visibility,windSpeed,sys,placeName,date){
+    constructor(coords,weather,main,visibility,windSpeed,sys,placeName,date){ 
        this.coords = coords;
        this.weather = weather;
        this.main = main;
@@ -10,7 +10,7 @@ module.exports = class Weather {
        this.sys = sys;
        this.placeName = placeName,
        this.date = date;
-    }
+     }
 
     saveClientDataByLatLong(){
         LatLongDataOfClient = this;
