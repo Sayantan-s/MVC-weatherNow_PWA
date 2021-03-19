@@ -4,7 +4,13 @@ const options = {
     timeout: 27000
   };
 
-const geoButton = document.getElementById('geo-button');  
+const geoButton = document.getElementById('geo-button');
+const searchButton = document.getElementById('search-place-button');
+const searchInput = document.querySelector('.input_search');
+
+
+console.log(searchInput)
+
 const container = document.querySelector('.container');
 
 const getGeoCode = (_ => {
@@ -36,3 +42,16 @@ const getGeoCode = (_ => {
 
 geoButton.addEventListener('click',() => location.reload());
 
+searchButton.addEventListener('click',() => {
+  fetch('/weather-by-place',{
+    method : 'POST',
+    headers : {
+      'Content-Type': 'application/json'
+    },
+    body : JSON.stringify({ place : searchInput.value })
+  })
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+
+})

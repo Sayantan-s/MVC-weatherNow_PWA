@@ -41,3 +41,27 @@ exports.postWeather = (req,res) => {
     })
     .catch(err => console.log(err));
 }
+
+exports.postWeatherByPlace = (req,res) => {
+    const { place } = req.body;
+    const uri = `https://api.openweathermap.org/data/2.5/weather?q=${place.toLowerCase()}&appid=23241c693dde77dee1381e703ea69f89`;
+    fetch(uri)
+    .then(res => res.json())
+    .then(data => {
+        return res
+        .status(200)
+        .json({
+            status : 200,
+            data
+        })
+    })
+    .catch(err => {
+        return res
+        .status(400)
+        .json({
+            status : 400,
+            errorText : `${place} ? No such places found!`,
+            uri
+        })
+    });
+}
