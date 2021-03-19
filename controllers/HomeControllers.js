@@ -49,9 +49,9 @@ exports.postWeatherByPlace = (req,res) => {
     .then(res => res.json())
     .then(data => {
         return res
-        .status(200)
+        .status(data.cod)
         .json({
-            status : 200,
+            status : data.cod,
             data
         })
     })

@@ -17,6 +17,11 @@ module.exports = class Weather {
         console.log(this);
     }
     
+    saveSearchedData(){
+        console.log(this)
+        LatLongDataOfClient = this;
+    }
+
     static getDatabyLatLong(){
         return LatLongDataOfClient;
     }
