@@ -55,13 +55,5 @@ exports.postWeatherByPlace = (req,res) => {
             data
         })
     })
-    .catch(err => {
-        return res
-        .status(400)
-        .json({
-            status : 400,
-            errorText : `${place} ? No such places found!`,
-            uri
-        })
-    });
+    .catch(err => console.log(error));
 }
