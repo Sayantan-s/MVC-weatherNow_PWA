@@ -1,14 +1,11 @@
 const express = require('express');
 
-const { getHome, postWeather, getWeather, postWeatherByPlace } = require('../controllers/HomeControllers')
+const { getHome, postWeather, postWeatherByPlace } = require('../controllers/HomeControllers')
 
 const router = express.Router();
 
 
 router.get('/',getHome);
-
-router.get('/weather-now', getWeather);
-
 
 router.post('/weather-now', postWeather);
 

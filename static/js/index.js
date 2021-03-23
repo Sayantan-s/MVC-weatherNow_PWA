@@ -51,7 +51,12 @@ searchButton.addEventListener('click',() => {
     body : JSON.stringify({ place : searchInput.value })
   })
   .then(res => res.json())
-  .then(data => console.log(data))
+  .then(data => {
+    console.log(data)
+    if(data.status === 200){
+      return window.location.reload();
+    }
+  })
   .catch(err => console.log(err));
 
 })
