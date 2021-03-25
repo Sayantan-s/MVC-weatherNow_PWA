@@ -1,14 +1,23 @@
 const Weather = require('../model/WeatherData');
 require('dotenv').config;
 
+const date = new Date();
+
+const today = date.toDateString().split(' ');
+today.pop();
+
+const time = date.toTimeString().split(' ')[0].split(':')[0];
+
+const checkTime = time > 17 ? 'night' : 'day'
+
 const fetchAndSave = (urls,cb) => {
     return Weather.fetchDataServerside([...urls],data => {
         const { coord,weather,main,visibility,wind,sys,name,dt } = data[0]; 
         const temperatures = {
             ...main,
-            temp : main.temp - 273.15
+            temp : main.temp - 273.15,
         };
-        const databyLatLong = new Weather(coord,weather,temperatures,visibility,wind,sys,name,dt);
+        const databyLatLong = new Weather(coord,weather,temperatures,visibility,wind,sys,name,dt,checkTime);
         databyLatLong.saveClientDataByLatLong();
         return cb(data[0]);
     })
