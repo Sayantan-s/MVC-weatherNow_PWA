@@ -8,7 +8,7 @@ today.pop();
 
 const time = date.toTimeString().split(' ')[0].split(':')[0];
 
-const checkTime = time > 17 ? 'night' : 'day'
+const checkTime = (time > 5 && time < 17) ? 'day' : 'night'
 
 const fetchAndSave = (urls,cb) => {
     return Weather.fetchDataServerside([...urls],data => {

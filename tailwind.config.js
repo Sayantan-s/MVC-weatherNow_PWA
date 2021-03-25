@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
@@ -6,17 +8,19 @@ module.exports = {
       fontFamily : {
         'body' : ['Nunito']
       },
-      colors: {
-        transparent: 'transparent',
-        current: 'currentColor',
-        black: colors.black,
-        white: colors.white,
-        gray: colors.trueGray,
-        indigo: colors.indigo,
-        red: colors.rose,
-        yellow: colors.amber,
-      }
     },
+    colors: {
+      ...colors,
+      weather : {
+        yellow : '#FFBD50',
+        blue : {
+          light : '#E5E8FE',
+          medium : '#A2ACFF',
+          dark : '#333866'
+        },
+        grey : '#ADB1CC'
+      }
+    }
   },
   variants: {
     extend: {},

@@ -1,17 +1,18 @@
 extends includes/layout.pug
 block content 
-     main.section 
+     main.section
             header 
                 h1.text-3xl.font-bold.text-center.p-10 CHECK WEATHER
             section.text-center.mx-auto(class="container",dataispresent=data ? "true" : "false")    
                 if data 
                     -var { placeName,coords,main,checkTime,weather } = data
                     -const { temp,temp_min,temp_max } = main
-                    -const image = `images/${checkTime}_${weather[0].description}.png`
+                    -const image = `images/${checkTime}_${weather[0].main.toLowerCase()}.png`
                     .flex.flex-col
                         h1.text-5xl #{placeName}
-                        img(src=image,width="200").my-6.mx-auto
-                        h2.uppercase.text-6xl.tocelcius.font-bold #{temp.toFixed(1)}&deg;c
+                        .flex 
+                            img(src=image,width="200").my-6.mx-auto
+                            h2.uppercase.text-6xl.tocelcius.font-bold #{temp.toFixed(1)}&deg;c
                 button.mx-auto.my-10.bg-gradient-to-br.from-yellow-300.to-yellow-600.px-4.py-3.shadow-sm.rounded-xl.w-max.text-white.font-bold(id="geo-button",class="focus:outline-none") Get your location
                 .flex.items-center.w-max.mx-auto 
                     input.placeholder-white.outline-none.shadow-sm.px-4.py-3.text-gray-100.bg-transparent.border-b-2.border-yellow-300.placeholder-opacity-70.font-bold(placeholder="e.g. Kolkata",class="input_search",type="search")
