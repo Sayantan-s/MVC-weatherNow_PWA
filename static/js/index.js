@@ -18,7 +18,7 @@ const getGeoCode = (_ => {
         console.log('geolocation available')
         navigator.geolocation.getCurrentPosition(position => {
             const { coords : { latitude,longitude } } = position;
-            fetch('/weather-now',{
+            fetch('/',{
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -43,20 +43,7 @@ const getGeoCode = (_ => {
 geoButton.addEventListener('click',() => location.reload());
 
 searchButton.addEventListener('click',() => {
-  fetch('/weather-by-place',{
-    method : 'POST',
-    headers : {
-      'Content-Type': 'application/json'
-    },
-    body : JSON.stringify({ place : searchInput.value })
-  })
-  .then(res => res.json())
-  .then(data => {
-    console.log(data)
-    if(data.status === 200){
-      return window.location.reload();
-    }
-  })
-  .catch(err => console.log(err));
-
+  if(searchInput.value.trim() !== ''){
+      window.location = '/?place=' + searchInput.value;
+  }
 })
