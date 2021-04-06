@@ -40,7 +40,7 @@ const getGeoCode = (_ => {
     } 
 })()
 
-geoButton.addEventListener('click',() => location.reload());
+geoButton.addEventListener('click',getGeoCode);
 
 searchButton.addEventListener('click',() => {
   if(searchInput.value.trim() !== ''){
