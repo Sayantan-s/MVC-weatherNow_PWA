@@ -1,8 +1,7 @@
 const path = require('path');
 
 const express = require('express');
-const bodyParser = require('body-parser');
-require('dotenv').config;
+require('dotenv').config();
 
 const Home = require('./routes/home');
 
@@ -11,11 +10,13 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','pug');
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static('static'));
-app.use(express.json());
+const middlewares = [
+    express.urlencoded({ extended: false }),
+    express.static('static'),
+    express.json()
+]
 
-
+app.use(middlewares);
 app.use(Home); 
 app.use((req,res) => {
     res

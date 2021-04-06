@@ -26,14 +26,16 @@ const fetchAndSave = (urls,cb) => {
 }
 
 exports.getHome = ((req,res) => {
-    if(req.query.place){
-        const { place } = req.query;
+
+    const { place } = req.query;
+
+    if(place){
 
         const city = place.toLowerCase()
 
-        const uri = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=23241c693dde77dee1381e703ea69f89`;
+        const uri = `${process.env.URL}/weather?q=${city}&appid=${process.env.API_KEY}`;
 
-        return fetchAndSave([uri],data => {
+        return fetchAndSave([uri],_ => {
             return res
             .status(200)
             .render('index',{
@@ -55,8 +57,8 @@ exports.getHome = ((req,res) => {
 
 exports.postWeather = (req,res) => {
     const { latitude,longitude } = req.body;
-    const api_url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=23241c693dde77dee1381e703ea69f89`
-    const api_url2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=daily&appid=23241c693dde77dee1381e703ea69f89`
+    const api_url = `${process.env.URL}/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.API_KEY}`
+    const api_url2 = `${process.env.URL}/onecall?lat=${latitude}&lon=${longitude}&exclude=daily&appid=${process.env.API_KEY}`
 
     return fetchAndSave([api_url,api_url2],_ => {
         return res

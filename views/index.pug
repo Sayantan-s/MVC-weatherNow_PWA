@@ -3,7 +3,7 @@ block content
      main(class="w-9/12 bg-purple-600 flex shadow-2xl rounded-3xl").section
             section 
                 h1.text-3xl.font-bold.text-center.p-10 CHECK WEATHER
-                div.text-center.max-w-max(class="container",dataispresent=data ? "true" : "false")    
+                div.text-center.max-w-max(class="container",data-is-present= data ? "true" : "false")    
                     if data 
                         -var { placeName,coords,main,checkTime,weather } = data
                         -const { temp,temp_min,temp_max } = main

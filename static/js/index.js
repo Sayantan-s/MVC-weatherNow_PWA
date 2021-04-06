@@ -27,7 +27,7 @@ const getGeoCode = (_ => {
             })
             .then(res => res.json())
             .then(_ => {
-              if(container.getAttribute('dataispresent') === "false"){
+              if(container.dataset.isPresent === "false"){
                 return location.reload();
               }
               return;
