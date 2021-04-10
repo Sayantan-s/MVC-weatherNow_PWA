@@ -5,8 +5,9 @@ const { getHome, postWeather } = require('../controllers/HomeControllers')
 const router = express.Router();
 
 
-router.get('/',getHome);
-
-router.post('/', postWeather);
+router
+.route('/')
+.get(getHome)
+.post(postWeather);
 
 module.exports = router;

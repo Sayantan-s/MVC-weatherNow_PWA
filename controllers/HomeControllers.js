@@ -28,6 +28,7 @@ const fetchAndSave = (urls,cb) => {
     })
 }
 
+
 exports.getHome = ((req,res) => {
 
     const { place } = req.query;
