@@ -1,19 +1,6 @@
 const Weather = require('../model/WeatherData');
+const checkTime = require('../utils/date')
 require('dotenv').config;
-
-const date = new Date();
-
-const today = date.toDateString().split(' ');
-today.pop();
-
-const time = date
-.toTimeString()
-.split(' ')[0]
-.split(':')[0];
-
-const checkTime = (time > 5 && time < 17) ? 'day' : 'night'
-
-console.log(date.toTimeString())
 
 const fetchAndSave = (urls,cb) => {
     return Weather.fetchDataServerside([...urls],data => {
@@ -62,9 +49,9 @@ exports.getHome = ((req,res) => {
 exports.postWeather = (req,res) => {
     const { latitude,longitude } = req.body;
     const api_url = `${process.env.URL}/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.API_KEY}`
-    const api_url2 = `${process.env.URL}/onecall?lat=${latitude}&lon=${longitude}&exclude=daily&appid=${process.env.API_KEY}`
+    //const api_url2 = `${process.env.URL}/onecall?lat=${latitude}&lon=${longitude}&exclude=daily&appid=${process.env.API_KEY}`
 
-    return fetchAndSave([api_url,api_url2],_ => {
+    return fetchAndSave([api_url],_ => {
         return res
         .status(200)
         .json({

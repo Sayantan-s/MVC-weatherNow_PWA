@@ -32,6 +32,7 @@ app.use((req,res) => {
 //api.openweathermap.org/data/2.5/weather?zip=94040,us&appid={API key}
 //api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
 //apikey=23241c693dde77dee1381e703ea69f89
+//api.openweathermap.org/data/2.5/forecast?q=kolkata&appid=23241c693dde77dee1381e703ea69f89
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,() => {

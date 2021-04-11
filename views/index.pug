@@ -1,18 +1,36 @@
 extends includes/layout.pug
 block content 
-     main(class="w-9/12 bg-purple-600 flex shadow-2xl rounded-3xl").section
+     main(class="w-9/12 bg-gray-100 flex shadow-2xl rounded-3xl").section
             section 
                 h1.text-3xl.font-bold.text-center.p-10 CHECK WEATHER
                 div.text-center.max-w-max(class="container",data-is-present= data ? "true" : "false")    
                     if data 
-                        -var { placeName,coords,main,checkTime,weather } = data
-                        -const { temp,temp_min,temp_max } = main
+                        -var { placeName,coords,main,checkTime,weather,visibility,wind } = data
+                        -const { temp,temp_min,temp_max,humidity } = main
                         -const image = `images/${checkTime}_${weather[0].main.toLowerCase()}.png`
                         .flex.flex-col
                             h1.text-5xl #{placeName}
                             .flex 
                                 img(src=image,width="200").my-6.mx-auto
                                 h2.uppercase.text-6xl.tocelcius.font-bold #{temp.toFixed(1)}&deg;c
+                                .flex.flex-col.text-left
+                                    h1.font-semibold.text-3xl.text-weather-grey Visbility
+                                    text.text-weather-blue-dark.text-5xl.font-semibold.mt-4
+                                        span #{ visibility/1000 }
+                                        span.text-xl &nbsp; Km
+                                    text.text-2xl.font-semibold.mt-5 Average
+                                .flex.flex-col.text-left
+                                    h1.font-semibold.text-3xl.text-weather-grey Humidity
+                                    text.text-weather-blue-dark.text-5xl.font-semibold.mt-4
+                                        span #{ humidity }
+                                        span.text-xl &nbsp; %
+                                    text.text-2xl.font-semibold.mt-5 Normal
+                                .flex.flex-col.text-left
+                                    h1.font-semibold.text-3xl.text-weather-grey Wind Status
+                                    text.text-weather-blue-dark.text-5xl.font-semibold.mt-4
+                                        span #{ wind.speed }
+                                        span.text-xl &nbsp; Km/hr
+                                    text.text-2xl.font-semibold.mt-5 Windy        
                     button.mx-auto.my-10.bg-gradient-to-br.from-yellow-300.to-yellow-600.px-4.py-3.shadow-sm.rounded-xl.w-max.text-white.font-bold(id="geo-button",class="focus:outline-none") Get your location
                     .flex.items-center.w-max.mx-auto 
                         input.placeholder-white.outline-none.shadow-sm.px-4.py-3.text-gray-100.bg-transparent.border-b-2.border-yellow-300.placeholder-opacity-70.font-bold(placeholder="e.g. Kolkata",class="input_search",type="search")
